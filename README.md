@@ -21,9 +21,10 @@ This appliance includes all the standard features in [TurnKey Core](https://www.
 To create a new Grafana dashboard, you can use the Grafana web interface. Follow these steps:
 
 1. Open your browser and navigate to the Grafana login page.
-2. Log in with the admin credentials set at first boot.
-3. Click on the "+" icon in the left-hand menu and select "Dashboard".
-4. Customize your dashboard by adding panels and configuring data sources.
+2. Log in with the admin credentials set by default in first boot (user: admin | password:admin).
+3. Change the default Grafana Password
+4. Click on the "+" icon in the left-hand menu and select "Dashboard".
+5. Customize your dashboard by adding panels and configuring data sources.
 
 **Managing Grafana via Webmin**
 
