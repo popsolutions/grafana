@@ -21,3 +21,4 @@ chmod -R 755 /etc/grafana
 
 # Create a symbolic link for the Grafana service
 ln -s /lib/systemd/system/grafana-server.service /etc/systemd/system/grafana.service
+systemctl daemon-reload
