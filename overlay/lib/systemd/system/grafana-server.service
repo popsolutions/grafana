@@ -1,0 +1,34 @@
+[Unit]
+Description=Grafana instance
+Documentation=http://docs.grafana.org
+Wants=network-online.target
+After=network-online.target
+After=postgresql.service mariadb.service mysql.service influxdb.service
+
+[Service]
+EnvironmentFile=/etc/default/grafana-server
+User=grafana
+Group=grafana
+Type=simple
+Restart=on-failure
+WorkingDirectory=/usr/share/grafana
+RuntimeDirectory=grafana
+RuntimeDirectoryMode=0750
+ExecStart=/usr/share/grafana/bin/grafana server                                     \
+                            --config=${CONF_FILE}                                   \
+                            --pidfile=${PID_FILE_DIR}/grafana-server.pid            \
+                            --packaging=deb                                         \
+                            cfg:default.paths.logs=${LOG_DIR}                       \
+                            cfg:default.paths.data=${DATA_DIR}                      \
+                            cfg:default.paths.plugins=${PLUGINS_DIR}                \
+                            cfg:default.paths.provisioning=${PROVISIONING_CFG_DIR}
+
+# Security settings
+ProtectSystem=no
+ProtectHome=no
+PrivateTmp=no
+NoNewPrivileges=no
+RestrictNamespaces=no
+
+[Install]
+WantedBy=multi-user.target
