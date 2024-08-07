@@ -6,17 +6,18 @@ apt update && apt upgrade -y
 mkdir -p /etc/apt/keyrings/
 
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | tee /etc/apt/keyrings/grafana.gpg > /dev/null
-
 echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | tee /etc/apt/sources.list.d/grafana.list
-
 apt update
 apt install -y grafana
 
-# Ensure the Grafana directories have the correct permissions
+# Creates the data directory
 mkdir -p /usr/share/grafana/data
 
+# Ensure the Grafana directories have the correct permissions
 chown -R grafana:grafana /usr/share/grafana
 chown -R grafana:grafana /etc/grafana
 chmod -R 755 /usr/share/grafana
 chmod -R 755 /etc/grafana
 
+# Create a symbolic link for the Grafana service
+ln -s /lib/systemd/system/grafana-server.service /etc/systemd/system/grafana.service
